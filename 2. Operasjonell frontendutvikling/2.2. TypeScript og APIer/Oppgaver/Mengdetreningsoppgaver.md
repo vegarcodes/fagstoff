@@ -98,11 +98,35 @@ Dette er kunnskap vi kommer til å grave mye i på muntlig eksamen, så du kan s
 + Bruke responsen fra APIet til å avgjøre om kallet gikk som det skulle ved å bruke `Response.ok` og `Response.status`.
 
 ### Bruke `export` og `import` til modulær kode
++ Forstå hvordan `import` brukes til å hente inn kode fra filer og pakker utenfor filen man jobber i.
++ Forstå hvordan `export` brukes til å gjøre funksjoner, variabler og annen kode tilgjengelig til filer og pakker utenfor filen de defineres i.
++ Forstå forskjellen på `export` og `export default`.
++ Forstå hvordan en kodebase bør deles opp i mapper og filer etter formål for å gjøre et prosjekt mer ryddig.
 
-### Bruke `try`, `catch` og `finally` til feilhåndtering
+### Bruke `try`, `catch` og `throw` til feilhåndtering
++ Bruke `try` og `catch` til å wrappe kode som potensielt kan kaste ut feil for å gjøre enkel feilhåndtering.
++ Klare å skille på ulike typer feil som oppstår inne i en `catch`-blokk hvis flere forskjellige typer feil kan oppstå i koden.
++ Bruke `throw` til å kaste ut feil i koden om en uventet situasjon oppstår.
++ Forstå hva `throw`, eller "å kaste ut", feil betyr i sammenhengen, og hva som skjer hvis feilen ikke blir tatt i mot av en `catch`.
 
 ### Bruke `async` og `await` til å håndtere asynkronitet
++ Bruke `async` til å markere funksjoner som inneholder asynkrone handlinger.
++ Bruke `await` til å håndtere en asynkron handling som om den var synkron.
++ Klare å forklare hva et `Promise<>` er i denne sammenhengen, hvilke tilstander (states) et `Promise<>` kan ha og hvordan disse påvirker flyten i koden.
++ Klare å forklare begrepet "top-level await". 
 
 ### Bruke CrudOps-APIet
++ Lage en fork av CrudOps til egen bruk, altså ikke samme fork som gruppen bruker i prosjektet.
++ Installere avhengigheter med npm.
++ Sette opp riktige miljøvariabler i .env-filen.
++ Klare å starte APIet så det kjører på port 3000.
++ Gjøre et `fetch()`-kall fra klientkode mot APIet og se at det kommer data tilbake som forventet.
++ Verifisere at full CRUD fungerer fra klientkode gjennom flere `fetch`-kall.
 
-### Bytte template i CrudOps-APIet
+### Endre og bytte templates i CrudOps-APIet
++ Opprette en ny JSON-fil med data i templates-mappa.
++ Endre .env-filen slik at denne peker på den nye template-filen.
++ Slette db.json.
++ Starte APIet på nytt og se at den lager en ny db.json-fil med dataene fra templaten.
++ Klare å endre på template-filen som er i bruk, slette gammel db.json og starte APIet på nytt slik at datastrukturen endrer seg.
++ Forstå hvorfor db.json ikke sjekkes inn med Git.
