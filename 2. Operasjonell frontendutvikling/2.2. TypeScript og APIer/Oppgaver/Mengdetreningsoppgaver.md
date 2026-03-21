@@ -6,11 +6,15 @@ Dette dokumentet inneholder oppgaver du kan jobbe med for å få mengdetrening m
 
 Noen oppgaver er vanskeligere enn andre, og det er lurt å starte med de enkleste oppgavene først, selv om du føler at du har en grei forståelse av stoffet. Det er derfor det heter mengdetrening.
 
+
+
 ## Grunnleggende ferdigheter
 
 For at du skal klare å fullføre dette emnet, må du først mestre de **grunnleggende ferdighetene** vi forventer at alle studenter har god kontroll på. Oppgavene er laget for å teste de grunnleggende ferdighetene, og du må bruke "litt av alt" av kunnskapen du besitter. Hvis du kommer over en grunnleggende ferdighet du ikke føler deg trygg på, bør du starte med å lese deg opp litt før du setter i gang med mengdetreningen. 
 
 Dette er kunnskap vi kommer til å grave mye i på muntlig eksamen, så du kan se på dette som en slags "grunnmur" av ferdigheter du må være 100% trygg på. Hvis vi ser at forståelsen din er mangelfull, vil dette trekke ned karakteren betraktelig.
+
+
 
 ## Liste over grunnleggende ferdigheter med forklaring
 
@@ -136,6 +140,8 @@ Dette er kunnskap vi kommer til å grave mye i på muntlig eksamen, så du kan s
 + Klare å lese og forstå teknisk dokumentasjon om HTML, CSS og TypeScript, og implementere egen kode ut fra dokumentasjonens innhold.
 + Bruke teknisk dokumentasjon til feilsøking av egen kode.
 
+
+
 ## Oppgaver
 
 Når du går i gang med oppgavene, skal du ta utgangspunkt i følgende retningslinjer:
@@ -144,7 +150,9 @@ Det er et krav at hver oppgave skal ha **sitt eget Vite-prosjekt** og **sitt ege
 
 Når du er ferdig med å implementere hver oppgave og du er fornøyd, skal du sjekke at feilhåndteringen din fungerer som den skal. Forsøk å endre på endepunktene du henter data fra slik at du får feilkoder som 404 eller 500 eller lignende og se hvordan appen du har laget håndterer feilen. Tenk på hva en sluttbruker ville tenkt: om en feil oppstår, hvordan vil sluttbrukeren forvente å bli informert om feilen? Hva bør skje etter en feil har oppstått? 
 
-## Oppgave 1: En enkel nyhets-app med bokmerkefunksjon
+
+
+## Oppgave 1: en enkel nyhets-app med bokmerkefunksjon
 
 ### Oppgave 1-1
 
@@ -183,3 +191,58 @@ Du skal utvide siden til å vise de 10 siste bokmerkene brukeren har laget i en 
 ### Oppgave 1-7 (ekstra utfordrende)
 
 Du skal utvide bokmerkefunksjonaliteten slik at dersom bokmerket allerede er lagret i APIet, skal den slette det eksisterende bokmerket i stedet for å lage et nytt. Knappen i grensesnittet skal ha forskjellig tekst basert på om den vil lagre eller slette bokmerket. Det er opp til deg å avgjøre hvordan denne funksjonen skal implementeres.
+
+
+
+## Oppgave 2: Blackjack
+
+Du skal gjenskape spillet [Blackjack](https://bicyclecards.com/how-to-play/blackjack) i nettleseren. Du skal bruke [Deck of Cards API](https://deckofcardsapi.com/) i denne oppgaven. APIet skal brukes til å lage en kortstokk som det kan deles ut kort fra, og hver gang et eller flere kort skal trekkes, skal du bruke endepunktet som trekker et kort. Når du lager en ny kortstokk med APIet, får du en ID tilbake som identifiserer hvilken kortstokk du jobber mot. Denne må du ta vare på i appen din så den kan brukes for hver handling.
+
+### Oppgave 2-1
+
+Du skal begynne med å sette opp prosjektet først og fremst. Lag en enkel papirskisse over hvordan du vil at brukergrensesnittet ditt skal se ut, og skriv HTML og CSS for å lage et skjelett.
+
+Ta en titt på APIets dokumentasjon, og begynn med å lage riktige typer for dataene som APIet leverer ut. Du kan anta at du vil trenge en type som heter `Card`, som representerer ett enkelt spillkort, og en type som heter `Deck` som beskriver en kortstokk som inneholder kortene. Typene du lager skal ligge i egne filer, og eksporteres slik at de kan brukes andre steder.
+
+Lag deretter funksjoner som utveksler data med APIets endepunkter. Du vil minst trenge en funksjon for å lage en ny kortstokk, en funksjon for å trekke et kort, og en funksjon for å stokke kortstokken. Disse funksjonene skal ligge i egne filer, og eksporteres slik at de kan brukes andre steder.
+
+### Oppgave 2-2
+
+Du skal nå begynne å lage spillogikken. Spillet du skal lage har to spillere: brukeren selv (kalt P1), og en datastyrt spiller som motstander (kalt CPU).
+
+Først skal du bruke APIet til å trekke fire kort. De to første skal deles ut til P1, de to siste til CPU. 
+
+Spillet skal deretter undersøke om noen av spillerene har fått blackjack. Dersom P1 har blackjack, skal teksten "Du har vunnet!" vises på skjermen, og dersom CPU har blackjack, skal teksten "Du har tapt!" vises på skjermen i stedet for.
+
+Spillet skal ikke begynne før brukeren har trykket på en knapp som starter spillet. Du må derfor dele opp logikken i funksjoner. Hvordan du deler opp logikken er opp til deg selv; forsøk å identifisere hvilke handlinger i spillet som kommer til å skje mer enn én gang. Skal spillet dele ut kort flere ganger? Skal spillet sjekke om noen har vunnet flere ganger?
+
+Funksjoner du lager skal legges i egne filer og eksporteres slik at du lett kan importere dem ved behov.
+
+### Oppgave 2-3
+
+Dersom den første utdelte hånden ikke førte til at noen vant, kan P1 vises to knapper, der hen velge om hen vil trekke flere kort eller stå. Dersom flere kort trekkes, må det for hvert trukne kort undersøkes om P1s hånd er større enn 21. Hvis den er det, er spillet slutt og teksten "Du har tapt!" skal vises. P1 kan trekke kort helt til de går over 21 eller velger å stå.
+
+Når P1 har valgt å stå, er det CPU sin tur til å gjøre samme prosess. CPU skal ha som regel at så lenge hånden er 16 eller mindre, skal den trekke kort. Om hånden er 17 eller høyere, skal den stå. Hvis CPU sin hånd går over 21, skal teksten "Du har vunnet!" vises. 
+
+Dersom begge spillere har trukket helt til de står, må spillet sammenligne de to hendene, og den med størst hånd vinner. Spillet skal vise riktig melding basert på om P1 vant eller tapte.
+
+Når et spill er ferdig, skal P1 kunne trykke på en knapp som deler ut et nytt spill. Dette fortsetter helt til P1 lukker spillet. Dersom et nytt spill deles ut, må kortstokken stokkes først. (Dette kan du sløyfe eller vurdere hvor ofte må skje dersom du bruker flere kortstokker som er stokket sammen; les API-ets dokumentasjon for dette.)
+
+### Oppgave 2-4
+
+For å fremheve casino-følelsen skal P1 ha mulighet til å vedde digitale dollar. Hvor mye penger P1 vil legge i potten skal avgjøres før spillet starter, og P1 skal ikke kunne vedde mer enn hen har tilgjengelig. Når spillet laster for første gang, skal P1 få $100 hen kan spille for. 
+
+Dersom et spill vinnes, skal P1 få utbetalt dobbelt så mye som hen veddet. Ved blackjack skal P1 få utbetalt tre ganger så mye som hen veddet i stedet for. Taper P1, går alle pengene til banken.
+
+Du skal nå implementere denne logikken. Dette skal du gjøre gjennom et objekt i TypeScript, som du legger i en egen fil og deretter eksporterer slik at andre filer kan bruke den. Dette objektet skal inneholde "tilstanden" til pengedelen av spillet. Objektet skal være av følgende type, som du kan kopiere og bruke i kodebasen din:
+
+```ts
+type BlackjackFunds = {
+  availableFunds: number;
+  currentBet: number;
+  addFunds: (amount: number) => void;
+  subtractFunds: (amount: number) => void;
+};
+```
+
+Dersom P1 ender opp med å ha 0 i penger, skal en game over-screen vises for brukeren. Brukeren må så starte spillet på nytt for å begynne med 100 dollar igjen.
