@@ -8,7 +8,7 @@ Noen oppgaver er vanskeligere enn andre, og det er lurt å starte med de enklest
 
 ## Grunnleggende ferdigheter
 
-For at du skal klare å fullføre dette emnet, må du først mestre de **grunnleggende ferdighetene** vi forventer at alle studenter har god kontroll på. Oppgavene er merket med hvilke(n) av disse grunnleggende ferdighetene du skal bruke. Hvis du kommer over en grunnleggende ferdighet du ikke føler deg trygg på, bør du starte med å lese deg opp litt før du setter i gang med mengdetreningen. 
+For at du skal klare å fullføre dette emnet, må du først mestre de **grunnleggende ferdighetene** vi forventer at alle studenter har god kontroll på. Oppgavene er laget for å teste de grunnleggende ferdighetene, og du må bruke "litt av alt" av kunnskapen du besitter. Hvis du kommer over en grunnleggende ferdighet du ikke føler deg trygg på, bør du starte med å lese deg opp litt før du setter i gang med mengdetreningen. 
 
 Dette er kunnskap vi kommer til å grave mye i på muntlig eksamen, så du kan se på dette som en slags "grunnmur" av ferdigheter du må være 100% trygg på. Hvis vi ser at forståelsen din er mangelfull, vil dette trekke ned karakteren betraktelig.
 
@@ -130,3 +130,56 @@ Dette er kunnskap vi kommer til å grave mye i på muntlig eksamen, så du kan s
 + Starte APIet på nytt og se at den lager en ny db.json-fil med dataene fra templaten.
 + Klare å endre på template-filen som er i bruk, slette gammel db.json og starte APIet på nytt slik at datastrukturen endrer seg.
 + Forstå hvorfor db.json ikke sjekkes inn med Git.
+
+### Lese og forstå dokumentasjon om webteknologi og APIer
++ Klare å lese og forstå hvordan et API skal brukes ut fra dens skriftlige dokumentasjon.
++ Klare å lese og forstå teknisk dokumentasjon om HTML, CSS og TypeScript, og implementere egen kode ut fra dokumentasjonens innhold.
++ Bruke teknisk dokumentasjon til feilsøking av egen kode.
+
+## Oppgaver
+
+Når du går i gang med oppgavene, skal du ta utgangspunkt i følgende retningslinjer:
+
+Det er et krav at hver oppgave skal ha **sitt eget Vite-prosjekt** og **sitt eget Git-repository.** For hver oppgave skal du altså sette opp et nytt prosjekt med tilhørende repository lokalt. Du velger selv om du også vil pushe disse til GitHub. Du skal **committe smått og ofte** — det er mye ryddigere med mange små commits med få endringer i få filer, enn få commits der hver av dem endrer hele prosjektet.
+
+Når du er ferdig med å implementere hver oppgave og du er fornøyd, skal du sjekke at feilhåndteringen din fungerer som den skal. Forsøk å endre på endepunktene du henter data fra slik at du får feilkoder som 404 eller 500 eller lignende og se hvordan appen du har laget håndterer feilen. Tenk på hva en sluttbruker ville tenkt: om en feil oppstår, hvordan vil sluttbrukeren forvente å bli informert om feilen? Hva bør skje etter en feil har oppstått? 
+
+## Oppgave 1: En enkel nyhets-app med bokmerkefunksjon
+
+### Oppgave 1-1
+
+Du skal bruke [ok.surf sitt nyhets-API](https://ok.surf/) i denne oppgaven. Lag en enkel side som henter de siste nyhetene fra APIet, og deretter viser overskriftene i en liste på siden. Hver overskrift skal også være en lenke til nyhetssaken. Du finner både overskrift og URL i APIets data. Du skal bruke `/news-feed`-endepunktet til å hente dataene.
+
+Selve funksjonaliteten for å hente data fra APIet skal være isolert i en egen funksjon. Denne skal ligge i en egen fil og eksporteres, slik at den kan importeres der den trengs. 
+
+### Oppgave 1-2
+
+Du skal nå utvide løsningen med **filtrering basert på nyhetskategori.** Du skal bruke responsen fra APIet til å finne ut hvilke kategorier den inneholder, og for hver av disse skal du lage en knapp på siden. Når en bruker trykker på knappen, skal kun nyheter fra den valgte kategorien vises på siden.
+
+### Oppgave 1-3
+
+ok.surf-APIet har to endepunkter som lar oss hente nyheter på en mer fingranulær måte: `/news-section-names` lar oss hente navnet på nyhetskategoriene som finnes, og `/news-section` lar oss hente nyhetene i den valgte kategorien. Du skal nå endre løsningen fra å gjøre et API-kall som henter alle nyheter før de filtreres, til å gjøre API-kallet først når brukeren trykker på knappen til den ønskede kategorien. Du skal bruke `/news-section-names`-endepunktet når siden laster inn for å hente ut kategoriene og lage knappene dynamisk, og `/news-section`-endepunktet til å hente nyhetene på knappetrykk.
+
+**PS:** merk at `/news-section`-endepunktet bruker `POST`, ikke `GET`, og du må endre løsningen din deretter.
+
+### Oppgave 1-4
+
+Du skal nå fullføre TypeScript-implementasjonen av appen din. Du skal lage egne typer for alle data du får fra APIet slik at appen vet hvilken struktur dataene kommer på. Alle typer du lager skal ligge i egne filer og eksporteres, slik at de kan importeres der de trengs. Du skal også bruke riktige typer for alle variabler og returverdier i funksjoner du lager.
+
+### Oppgave 1-5
+
+Du skal lage en funksjon som gjør at det er mulig å lage bokmerker for nyhetssaker i appen. Disse bokmerkene skal persisteres (lagres) **ved å bruke CrudOps-APIet.**
+
+Du skal først lage en kopi av CrudOps-APIet som skal brukes kun til dette formålet. Dette gjør du ved å klone CrudOps-prosjektet på GitHub til din maskin, og deretter kan du endre navnet på mappen til for eksempel "news-bookmark-api" for å ikke blande det med APIet dere bruker i gruppearbeidet.
+
+Deretter skal du lage en egen **template** som du bytter til, kalt "bookmarks.json". Templaten skal bare inneholde et tomt array med navnet "bookmarks". Sett opp APIet til å bruke riktig template og angi en API-nøkkel. Kjør opp APIet og test at det fungerer.
+
+Du skal nå utvide nyhetsappen din der du legger en bokmerkeknapp ved siden av tittelen på nyhetssaken. Når knappen trykkes på, skal det sendes et API-kall til CrudOps-APIet du satte opp slik at den lagrer nyhetssaken i bookmarks-arrayet i databasen.
+
+### Oppgave 1-6
+
+Du skal utvide siden til å vise de 10 siste bokmerkene brukeren har laget i en liste over de vanlige nyhetssakene som brukeren henter inn. Du må lage egen styling slik at denne seksjonen fremstår annerledes. 
+
+### Oppgave 1-7 (ekstra utfordrende)
+
+Du skal utvide bokmerkefunksjonaliteten slik at dersom bokmerket allerede er lagret i APIet, skal den slette det eksisterende bokmerket i stedet for å lage et nytt. Knappen i grensesnittet skal ha forskjellig tekst basert på om den vil lagre eller slette bokmerket. Det er opp til deg å avgjøre hvordan denne funksjonen skal implementeres.
