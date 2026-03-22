@@ -246,3 +246,70 @@ type BlackjackFunds = {
 ```
 
 Dersom P1 ender opp med å ha 0 i penger, skal en game over-screen vises for brukeren. Brukeren må så starte spillet på nytt for å begynne med 100 dollar igjen.
+
+
+
+## Oppgave 3: Burger-Tron
+
+Fastfoodkjeden Burger-Tron skal etablere seg i Norge, og har ansatt deg til å lage deres nye bestillingssystem. Du skal ta utgangspunkt i CrudOps som et API for datalagring, og implementere en løsning som inneholder både en side der besøkende kan bestille mat, og en løsning for de som jobber på kjøkkenet der de kan holde rede på bestillinger som kommer inn slik at alle får maten de har bestilt.
+
+### Oppgave 3-1
+
+Start med å sette opp et nytt prosjekt i Vite som du pleier. Du skal lage to HTML-sider: `index.html` skal brukes av besøkende når de kommer inn i restauranten og går til en av bestillingsautomatene. Her skal det være mulig å se menyen, legge produkter til i bestillingen, og deretter trykke på "Bestill" når de er ferdige. Du trenger også en HTML-side kalt `backoffice.html` som de som jobber på kjøkkenet skal bruke. Her skal det være mulig å se hvilke bestillinger som har kommet inn, og markere disse med riktig status etterhvert som de jobbes med.
+
+Du må også lage en ny kopi av CrudOps-prosjektet. Her skal du lage en ny template kalt `burgertron.json` som du skal bruke i denne oppgaven. Til å starte med skal filen kun inneholde et objekt med to tomme arrays, kalt `menu` og `orders`. Sett opp .env-filen sånn at du bruker den nye templaten og lager en API-nøkkel. Verifiser at APIet starter som forventet og at frontenden har de to HTML-sidene før du fortsetter.
+
+### Oppgave 3-2
+
+Du skal nå lage den tekniske implementasjonen av menyen til Burger-Tron. Denne skal du legge inn i template-filen du har laget slik at den ikke overskrives om du må slette databasefilen senere.
+
+Hvert produkt i menyen skal inneholde tittel, en kort beskrivelse, lenke til et bilde av produktet, informasjon om allergener, pris og produktkategori.
+
+Menyen til Burger-Tron har fire produktkategorier: **burgere, sideretter, drikke og desserter.**  Hver produkt på menyen skal ligge i en av disse kategoriene, med forbehold om at flere kategorier kan lages senere. Informasjon om allergener skal utformes som et array slik at det er lett å sortere og filtrere senere. Lenke til bilde skal lagres som en tekststreng, der det skal lagres en URL.
+
+Du skal nå fylle ut templaten med minst to produkter i hver av produktkategoriene, til sammen åtte produkter. I tillegg skal du lage en egen type kalt `Product` som beskriver datastrukturen. Du skal ikke lagre produktkategori som en `string`. Typen skal lages i en egen fil og eksporteres slik at den kan importeres der det er bruk for den.
+
+### Oppgave 3-3
+
+Du skal nå fokusere på bestillinger. Når en bestilling kommer inn i systemet, skal den inneholde en liste over hvilke produkter som ligger i den, den samlede totalprisen for bestillingen, et ID-felt som fungerer som et ordrenummer, når bestillingen ble opprettet og når bestillingen sist ble oppdatert.
+
+Det skal også lages et felt for bestillingens **status**. Status kan være én av fire: ny bestilling, under behandling, klar for henting, hentet.
+
+Du skal lage en ny type kalt `Order` som beskriver datastrukturen til en bestilling. Typen skal lages i en ny fil og eksporteres slik at den kan importeres der det er bruk for den. 
+
+Merk: du skal ikke lage noen bestillinger i templaten. Dette arrayet skal stå tomt.
+
+### Oppgave 3-4
+
+For at besøkende og kjøkkenpersonell skal kunne bruke løsningen skal du nå implementere funksjoner som kaller på endepunktene i APIet. Disse funksjonene skal lages i separate filer og eksporteres slik at de kan importeres der det er bruk for dem. Du velger selv hvilken mappe- og filstruktur du bruker, men du skal implementere funksjoner som dekker følgende API-kall:
+
++ `GET` alle produkter: brukes når hele menyen skal vises for en besøkende.
++ `POST` en ny bestilling: brukes når en besøkende legger inn en ny bestilling.
++ `GET` alle bestillinger: brukes for å hente ut bestillinger som vises for de som jobber på kjøkkenet.
++ `PATCH` en bestilling: brukes for å endre status på en enkelt bestilling av de som jobber på kjøkkenet.
+
+### Oppgave 3-5:
+
+Du skal implementere HTML og CSS for de to sidene i løsningen. Du kan ta inspirasjon og utgangspunkt i hvordan eksisterende løsninger for bestillingsautomater og lignende fungerer — du trenger ikke tenke på responsivitet her. Ta utgangspunkt i at designet skal være desktop-only. Du skal bruke CSS grid for å designe layout på begge sidene, og farger, skrifttyper og størrelser skal lagres som CSS-variabler.
+
+### Oppgave 3-6:
+
+Du skal nå implementere TypeScript for bestillingssiden. En besøkende skal kunne legge til produkter, fjerne produkter, og endre antallet av et produkt når hen bestiller. I tillegg må du sørge for at det ikke er mulig å bestille 0 eller mindre av et produkt, og brukeren skal hele tiden bli vist totalsummen når de oppdaterer bestillingen sin.
+
+Implementasjonen din skal lages som et objekt i TypeScript. Objektet skal inneholde alle datafelter med informasjonen om bestillingens tilstand, og metoder du trenger å bruke for å oppdatere den tilstanden. Du skal bruke følgende type som mal for hvordan dette objektet ser ut:
+
+```ts
+export type CustomerOrderState = {
+  products: Product[];
+  addProduct: (newProduct: Product) => void;
+  removeProduct: (product: Product) => void;
+}
+```
+
+Basert på informasjonen som ligger i dette objektet kan du så regne ut totalsummen som skal vises for brukeren. Dette skal du gjøre ved å bruke `Array.reduce`-metoden i TypeScript.
+
+### Oppgave 3-7:
+
+Du skal nå implementere TypeScript for siden kjøkkenet bruker. Kjøkkenet skal ha mulighet til å se hvilke bestillinger som har hvilken status, og må raskt kunne oppdatere statusen etterhvert som maten lages og leveres ut til de besøkende. Her skal du bruke de funksjonene du laget tidligere for å hente ut data fra APIet om bestillinger.
+
+I tillegg må du implementere funksjonalitet som gjør at informasjon om bestillinger hentes ut fra APIet hvert 30. sekund, slik at kjøkkenet hele tiden er oppdatert på hvilke bestillinger som venter. Dette skal du gjøre ved å bruke `window.setInterval`-metoden i TypeScript.
