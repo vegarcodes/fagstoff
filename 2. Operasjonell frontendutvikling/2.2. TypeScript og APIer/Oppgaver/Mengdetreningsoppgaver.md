@@ -152,11 +152,11 @@ Når du er ferdig med å implementere hver oppgave og du er fornøyd, skal du sj
 
 
 
-## Oppgave 1: en enkel nyhets-app med bokmerkefunksjon
+## Oppgave 1: Nyhetsapp
 
 ### Oppgave 1-1
 
-Du skal bruke [ok.surf sitt nyhets-API](https://ok.surf/) i denne oppgaven. Lag en enkel side som henter de siste nyhetene fra APIet, og deretter viser overskriftene i en liste på siden. Hver overskrift skal også være en lenke til nyhetssaken. Du finner både overskrift og URL i APIets data. Du skal bruke `/news-feed`-endepunktet til å hente dataene.
+Du skal bruke [ok.surf sitt nyhets-API](https://ok.surf/) i denne oppgaven. Lag et nytt Vite-prosjekt og sett det opp slik du pleier. Lag en enkel HTML-side som henter de siste nyhetene fra APIet, og deretter viser nyhetsoverskriftene i en liste på denne siden. Hver overskrift skal også være en lenke til nyhetssaken. Du finner både overskrift og URL i APIets data. Du skal bruke `/news-feed`-endepunktet til å hente dataene.
 
 Selve funksjonaliteten for å hente data fra APIet skal være isolert i en egen funksjon. Denne skal ligge i en egen fil og eksporteres, slik at den kan importeres der den trengs. 
 
@@ -257,7 +257,7 @@ Fastfoodkjeden Burger-Tron skal etablere seg i Norge, og har ansatt deg til å l
 
 Start med å sette opp et nytt prosjekt i Vite som du pleier. Du skal lage to HTML-sider: `index.html` skal brukes av besøkende når de kommer inn i restauranten og går til en av bestillingsautomatene. Her skal det være mulig å se menyen, legge produkter til i bestillingen, og deretter trykke på "Bestill" når de er ferdige. Du trenger også en HTML-side kalt `backoffice.html` som de som jobber på kjøkkenet skal bruke. Her skal det være mulig å se hvilke bestillinger som har kommet inn, og markere disse med riktig status etterhvert som de jobbes med.
 
-Du må også lage en ny kopi av CrudOps-prosjektet. Her skal du lage en ny template kalt `burgertron.json` som du skal bruke i denne oppgaven. Til å starte med skal filen kun inneholde et objekt med to tomme arrays, kalt `menu` og `orders`. Sett opp .env-filen sånn at du bruker den nye templaten og lager en API-nøkkel. Verifiser at APIet starter som forventet og at frontenden har de to HTML-sidene før du fortsetter.
+Du må også lage en ny kopi av CrudOps-prosjektet. Du kan klone CrudOps-repositoryet og døpe om mappen til "burgertron-api" eller lignende. Her skal du lage en ny template kalt `burgertron.json` som du skal bruke i denne oppgaven. Til å starte med skal filen kun inneholde et objekt med to tomme arrays, kalt `menu` og `orders`. Sett opp .env-filen sånn at du bruker den nye templaten og lager en API-nøkkel. Verifiser at APIet starter som forventet og at frontenden har de to HTML-sidene før du fortsetter.
 
 ### Oppgave 3-2
 
@@ -288,6 +288,8 @@ For at besøkende og kjøkkenpersonell skal kunne bruke løsningen skal du nå i
 + `GET` alle bestillinger: brukes for å hente ut bestillinger som vises for de som jobber på kjøkkenet.
 + `PATCH` en bestilling: brukes for å endre status på en enkelt bestilling av de som jobber på kjøkkenet.
 
+Husk at du ikke skal sende med unik ID, tidspunkt for opprettelse eller tidspunkt for siste endring når du oppretter ny bestilling. Disse feltene lager CrudOps for deg.
+
 ### Oppgave 3-5:
 
 Du skal implementere HTML og CSS for de to sidene i løsningen. Du kan ta inspirasjon og utgangspunkt i hvordan eksisterende løsninger for bestillingsautomater og lignende fungerer — du trenger ikke tenke på responsivitet her. Ta utgangspunkt i at designet skal være desktop-only. Du skal bruke CSS grid for å designe layout på begge sidene, og farger, skrifttyper og størrelser skal lagres som CSS-variabler.
@@ -313,3 +315,90 @@ Basert på informasjonen som ligger i dette objektet kan du så regne ut totalsu
 Du skal nå implementere TypeScript for siden kjøkkenet bruker. Kjøkkenet skal ha mulighet til å se hvilke bestillinger som har hvilken status, og må raskt kunne oppdatere statusen etterhvert som maten lages og leveres ut til de besøkende. Her skal du bruke de funksjonene du laget tidligere for å hente ut data fra APIet om bestillinger.
 
 I tillegg må du implementere funksjonalitet som gjør at informasjon om bestillinger hentes ut fra APIet hvert 30. sekund, slik at kjøkkenet hele tiden er oppdatert på hvilke bestillinger som venter. Dette skal du gjøre ved å bruke `window.setInterval`-metoden i TypeScript.
+
+
+
+## Oppgave 4: Chat
+
+I denne oppgaven skal du lage en enkel chat-applikasjon som bruker CrudOps til å lagre og hente ut meldinger som sendes. Appen skal ha mulighet for å lage flere kanaler, slik at man kan ha forskjellige kanaler til forskjellige formål.
+
+PS: denne oppgaven har høyere vanskelighetsgrad og kan være ganske utfordrende å løse. Dersom du er litt utrygg på bruk av APIer ennå kan det være lurt å begynne med noen av de tidligere oppgavene først. 
+
+### Oppgave 4-1
+
+Start med å lage et nytt prosjekt med Vite der frontenden skal leve, og lag også en kopi av CrudOps. Det enkleste er å klone CrudOps-repositoryet lokalt og deretter døpe om mappen til f.eks "chat-api" eller lignende. Du skal lage en ny template i det klonede CrudOps-prosjektet, kalt "chat.json". Sett opp .env-filen slik at den bruker denne templaten og lag en API-nøkkel.
+
+Templaten skal inneholde et objekt på følgende struktur:
+
+```json
+{
+  "channels": [],
+  "messages": []
+}
+```
+
+### Oppgave 4-2
+
+Start med å lage HTML og CSS for løsningen. Du skal lage en layout som har en sidebar til ene siden der alle kanalene vises, mens hoveddelen skal fylle et større område og vise alle meldingene som er sendt i den valgte kanalen. I bunnen av hoveddelen skal chat-interfacet lages, med et tekstfelt for meldinger som skal sendes og en knapp for å sende meldingen. Meldinger i grensesnittet skal vise navnet på brukeren som sendte den, klokkeslettet meldingen ble sendt på, og meldingens innhold.
+
+Du skal bruke CSS grid til å lage denne layouten, og alle farger, skrifttyper og andre verdier du kan gjenbruke skal lagres som CSS-variabler. 
+
+Tips: start smått og jobb iterativt. Du blir garantert ikke helt fornøyd med layouten på første forsøk, og det gjør ingenting. Du kan jobbe videre med layouten etterhvert som du jobber med appen.
+
+### Oppgave 4-3
+
+Start med å lage typer for kanaler og meldinger.
+
+En kanal skal ha et navn, en kort beskrivelse, en unik ID og tidspunkter for opprettet og sist endret.
+
+En melding skal ha en forfatter, innholdet i meldingen, en unik ID og tidspunkter for opprettet og sist endret. I tillegg må meldingsobjektet inneholde et felt som inneholder IDen til kanalen meldingen ble postet i, slik at det er mulig å legge meldingen i riktig kanal i grensesnittet.
+
+Typene skal hete `Channel` og `Message`, og defineres i egne filer der typene eksporteres til bruk andre steder i kodebasen.
+
+### Oppgave 4-4
+
+Du skal nå begynne å lage funksjoner for å hente data fra APIet. Disse funksjonene skal legges i separate filer og eksporteres slik at de kan gjenbrukes ved behov. Du skal lage følgende funksjoner som henter data fra følgende endepunkt i APIet:
+
++ `GET` alle meldinger: trengs for å hente meldingshistorikken i chatten.
++ `GET` alle kanaler: trengs for å hente og vise kanaler i kanallisten
++ `POST` en ny melding: trengs for å sende en melding til en kanal.
++ `POST` en ny kanal: trengs når man skal opprette en ny kanal i kanallisten.
++ `DELETE` en melding: trengs for å kunne slette meldinger man angrer på at er sendt.
++ `DELETE` en kanal: trengs når man skal slette en hel kanal.
+
+Husk at når du oppretter meldinger og kanaler skal du ikke sende med unik ID, tidspunkt for opprettelse eller tidspunkt for siste endring. Disse feltene lages av CrudOps. 
+
+### Oppgave 4-4
+
+Nå som du har laget typer og funksjoner for å hente data, er det på tide å lage litt data som faktisk kan vises. Du skal endre templaten din slik at den inneholder en kanal kalt "Random", og lage en melding som hører til kanalen. Innholdet kan være en velkomstmelding som ønsker brukeren velkommen til appen, kanskje med noen instruksjoner om hvordan de lager nye kanaler og sender meldinger.
+
+### Oppgave 4-5
+
+Når brukeren går inn i appen din, må alle kanaler og meldinger hentes. Du skal lage en funksjon som viser en spinner for brukeren frem til disse dataene er ferdig innlastet, og gjemmer spinneren igjen når appen er klar. Denne funksjonen kan du kalle `setLoading(state: boolean)`, og du må lage HTML og CSS som passer.
+
+### Oppgave 4-6
+
+For at en bruker skal kunne sende meldinger i chatten, må brukeren ha et brukernavn. Når siden laster for første gang, må du spørre brukeren om hva de vil kalle seg. Dette kan du gjøre med en enkel `alert()`-boks, men brukeren skal ikke komme inn i appen før hen har oppgitt et brukernavn på minst fem tegn. Når brukeren har oppgitt navnet, tar du vare på det i en variabel som brukes så lenge appen kjører.
+
+### Oppgave 4-7
+
+Nå skal du implementere funksjonaliteten som henter og sender data til og fra APIet og tegner opp grensesnittet. **Denne oppgaven er ganske stor og litt vanskelig.** Det er viktig at du holder tunga rett i munnen. Oppsummert må du lage funksjonalitet som gjør følgende handlinger i rekkefølge:
+
++ Hent alle kanaler og alle meldinger fra APIet.
++ Tegn opp listen med kanaler i sidebaren basert på hvilke kanaler APIet sender tilbake.
++ Når brukeren trykker på en kanal i sidebaren, skal listen over meldinger lastes inn. Her må du filtrere alle meldingene som kommer fra APIet for å finne de som hører til kanalen, og deretter sortere dem i riktig rekkefølge slik at nyeste melding kommer nederst i grensesnittet.
++ Når en bruker sender en melding, skal du føye på brukernavnet som er oppgitt. Når en melding er bekreftet sendt, skal du deretter hente alle nye meldinger fra APIet.
++ Appen må automatisk hente nye meldinger fra APIet med jevne mellomrom og vise nye meldinger for brukeren. Du skal hente nye meldinger hvert tredje sekund.
+
+For å modularisere funksjonaliteten bør du skrive mest mulig av denne koden som enkeltstående funksjoner. Akkurat hvordan du går frem er opp til deg selv, men her er noen tips du kan ha i bakhodet.
+
++ Det er nok en god idé å skille ut opptegningen av kanallisten i en egen funksjon.
++ Det kan være lurt å lage en funksjon som har som sitt eneste formål å filtrere ut meldingene som tilhører kanalen brukeren står i. 
++ Det kan være en god idé å lage en egen funksjon som håndterer opptegningen av meldinger i en kanal. 
++ Uthenting av nye meldinger bør ligge i en egen funksjon, siden du uansett må lage en funksjon for å lage automatisk uthenting hvert tredje sekund.
+
+### Oppgave 4-8
+
+**Denne oppgaven er spesielt vanskelig.**
+
+Når brukeren har skrevet inn brukernavnet sitt, skal alle meldinger som brukeren har skrevet i chatten kunne slettes av brukeren selv (altså alle meldinger der avsender er det samme som brukernavnet). Dersom brukeren har oppgitt at hen heter "moderator", skal alle meldinger i chatten kunne slettes. Det skal da være mulig å dobbeltklikke på klokkeslettet for å slette meldingen. Det skal da komme opp en bekreftelsesboks, og om brukeren bekrefter, skal meldingen slettes fra APIet.
