@@ -8,13 +8,13 @@ Når du skal gjøre CRUD-operasjoner mot CrudOps-APIet må du følge en bestemt 
 + **URL-struktur (lag et nytt element)**: `localhost:3000/api/:ressursnavn`
 + **API-nøkkel:** Ja
 + **Request headers:**
-+ - `Authorization` må være satt til `Bearer: ${apiKey}`
-+ - `Content-Type` må være satt til `application/json`
+  - `Authorization` må være satt til `Bearer: ${apiKey}`
+  - `Content-Type` må være satt til `application/json`
 + **Request body:** Ja, objektet som skal opprettes må sendes med
 + **Respons:**
-+ - HTTP-kode 201 og en kopi av objektet som er opprettet hvis alt er OK
-+ - HTTP-kode 401 om autorisering (API-nøkkel) mangler eller ikke er korrekt
-+ - HTTP-kode 500 om noe går galt på serversiden av APIet
+  - HTTP-kode 201 og en kopi av objektet som er opprettet hvis alt er OK
+  - HTTP-kode 401 om autorisering (API-nøkkel) mangler eller ikke er korrekt
+  - HTTP-kode 500 om noe går galt på serversiden av APIet
 
 `:ressursnavn` skal byttes ut med den ressursen du vil opprette en ny oppføring i. Merk at APIet ikke sjekker om dataene du sender inn er på riktig struktur og inneholder riktige felter — du er selv ansvarlig for å besørge riktig datastruktur i objektet du sender inn!
 
@@ -57,9 +57,9 @@ try {
 + **Request headers:** Ingen spesielle
 + **Request body:** Nei
 + **Respons:**
-+ - HTTP-kode 200 og de etterspurte dataene i response body hvis dataene finnes
-+ - HTTP-kode 404 hvis dataene ikke finnes
-+ - HTTP-kode 500 om noe går galt på serversiden av APIet
+  - HTTP-kode 200 og de etterspurte dataene i response body hvis dataene finnes
+  - HTTP-kode 404 hvis dataene ikke finnes
+  - HTTP-kode 500 om noe går galt på serversiden av APIet
 
 `:ressursnavn` skal byttes ut med den ressursen du vil ha tilgang til i databasen, mens `:id` kun skal oppgis dersom du vil ha et bestemt element tilbake.
 
@@ -102,14 +102,14 @@ try {
 + **URL-struktur (oppdatere en eksisterende oppføring)**: `localhost:3000/api/:ressursnavn/:id`
 + **API-nøkkel:** Ja
 + **Request headers:**
-+ - `Authorization` må være satt til `Bearer: ${apiKey}`
-+ - `Content-Type` må være satt til `application/json`
+  - `Authorization` må være satt til `Bearer: ${apiKey}`
+  - `Content-Type` må være satt til `application/json`
 + **Request body:** Ja, informasjonen som skal oppdateres i objektet
 + **Respons:**
-+ - HTTP-kode 200 og en kopi av objektet som er oppdatert hvis alt er OK
-+ - HTTP-kode 401 om autorisering (API-nøkkel) mangler eller ikke er korrekt
-+ - HTTP-kode 404 dersom den angitte IDen ikke finnes i angitt ressurs
-+ - HTTP-kode 500 om noe går galt på serversiden av APIet
+  - HTTP-kode 200 og en kopi av objektet som er oppdatert hvis alt er OK
+  - HTTP-kode 401 om autorisering (API-nøkkel) mangler eller ikke er korrekt
+  - HTTP-kode 404 dersom den angitte IDen ikke finnes i angitt ressurs
+  - HTTP-kode 500 om noe går galt på serversiden av APIet
 
 `:ressursnavn` skal byttes ut med den ressursen du vil oppdatere, og `:id` skal inneholde unik ID til objektet du ønsker å oppdatere. Merk at APIet ikke sjekker om dataene du sender inn er på riktig struktur og inneholder riktige felter — du er selv ansvarlig for å besørge riktig datastruktur i objektet du sender inn!
 
@@ -194,14 +194,14 @@ Her vil responsen også inneholde det oppdaterte objektet og HTTP-kode 200, men 
 + **URL-struktur (oppdatere en eksisterende oppføring)**: `localhost:3000/api/:ressursnavn/:id`
 + **API-nøkkel:** Ja
 + **Request headers:**
-+ - `Authorization` må være satt til `Bearer: ${apiKey}`
-+ - `Content-Type` må være satt til `application/json`
+  - `Authorization` må være satt til `Bearer: ${apiKey}`
+  - `Content-Type` må være satt til `application/json`
 + **Request body:** Nei
 + **Respons:**
-+ - HTTP-kode 200 og et tomt objekt i response body dersom alt er OK
-+ - HTTP-kode 401 om autorisering (API-nøkkel) mangler eller ikke er korrekt
-+ - HTTP-kode 404 dersom den angitte IDen ikke finnes i angitt ressurs
-+ - HTTP-kode 500 om noe går galt på serversiden av APIet
+  - HTTP-kode 200 og et tomt objekt i response body dersom alt er OK
+  - HTTP-kode 401 om autorisering (API-nøkkel) mangler eller ikke er korrekt
+  - HTTP-kode 404 dersom den angitte IDen ikke finnes i angitt ressurs
+  - HTTP-kode 500 om noe går galt på serversiden av APIet
 
 `:ressursnavn` skal byttes ut med den ressursen du vil oppdatere, og `:id` skal inneholde unik ID til objektet du ønsker å oppdatere. Dataene slettes umiddelbart fra APIet, så pass på at du er sikker på at dataene skal slettes før du kjører koden!
 
