@@ -118,6 +118,8 @@ I komponentfilen vår ligger det to funksjoner: `renderNewsCardSkeleton(amount)`
 
 `renderNewsCard(newsItem)` har ansvaret for å gjøre om en enkelt nyhetssak, altså et objekt av typen `News` som vi har vært inne på tidligere, om til et kort i grensesnittet. Her tar vi ikke hele arrayet med nyhetssaker vi får fra API-kallet fordi det er fordelaktig å ha litt kontroll på gjenbruken: i noen tilfeller vil vi bruke funksjonen til å bare vise én enkelt sak, mens i de tilfellene der vi vil lage en liste med saker, kan vi bruke iterasjon over arrayet for å lage dem. 
 
+![Et skjermbilde fra eksempelappen der ferdige nyhetskort vises i grensesnittet.](assets/example-screenshot.png)
+
 ### Steg 4: styling av skeleton
 
 Når vi lager et skeleton-kort er det vanlig å legge på en liten animasjon som gjør at det ser ut som om kortet "pulserer" med en liten gradient. Denne animasjonen kalles ofte for "shimmering", og det er mange forskjellige eksempler på denne typen animasjon på nettet hvis du er interessert i å gjøre research selv.
